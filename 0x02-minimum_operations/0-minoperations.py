@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Minimum operations"""
 import math
 
@@ -23,11 +24,3 @@ def minOperations(n):
         ops += n
 
     return ops
-
-
-n = 4
-print("Min # of operations to reach {} char: {}".format(n, minOperations(n)))
-
-print(minOperations(14))
-n = 12
-print("Min # of operations to reach {} char: {}".format(n, minOperations(n)))
