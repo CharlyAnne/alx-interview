@@ -1,50 +1,43 @@
 #!/usr/bin/python3
 """ Srcipt reads stdin line by line and computes metrics"""
-import random
 import sys
-from time import sleep
-import datetime
 
-status_code_count = {}
 total_file_size = 0
-line_count = 0
+code = 0
+line_counter = 0
+dict_status_code = {"200": 0,
+                    "301": 0,
+                    "400": 0,
+                    "401": 0,
+                    "403": 0,
+                    "404": 0,
+                    "405": 0,
+                    "500": 0}
 
 try:
     for line in sys.stdin:
-        line = line.strip()
-        # line is parsed based on the specified input format
-        line_parts = line.split(' ')
-        # if parts not 7, skip the line
-        if len(line_parts) != 7:
-            continue
+        parsed_line = line.split()  # ✄ trimming
+        parsed_line = parsed_line[::-1]  # inverting
 
-        ip_address = line_parts[0]
-        date = line_parts[3].strip('[]')
-        status_code = line_parts[5]
-        file_size = int(line_parts[6])
+        if len(parsed_line) > 2:
+            line_counter += 1
 
-        # update total file size
-        total_file_size += file_size
+            if line_counter <= 10:
+                total_file_size += int(parsed_line[0])  # file size
+                code = parsed_line[1]  # status code
 
-        # update status code count
-        if status_code.isdigit():
-            status_code = int(status_code)
-            status_code_count[status_code] = status_code_count.get(
-                status_code, 0)
+                if (code in dict_status_code.keys()):
+                    dict_status_code[code] += 1
 
-        # increment line count by 1
-        line_count += 1
+            if (line_counter == 10):
+                print("File size: {}".format(total_file_size))
+                for key, val in sorted(dict_status_code.items()):
+                    if val != 0:
+                        print("{}: {}".format(key, val))
+                        counter = 0
 
-        # to print statsistics after every 10 lines
-        if line_count % 10 == 0:
-            print('Total file size:', total_file_size)
-            # Use sorted to iterate in ascending order
-            for code in sorted(status_code_count.keys()):
-                if status_code_count[code] != 0:
-                    print(f"{code}: {status_code_count[code]}")
-
-except KeyboardInterrupt:
-    # Print statistics when interrupted by keyboard
-    print('Total file size:', total_file_size)
-    for code in sorted(status_code_count.keys()):
-        print(f"{code}: {status_code_count[code]}")
+finally:
+    print("File size: {}".format(total_file_size))
+    for key, val in sorted(dict_status_code.items()):
+        if val != 0:
+            print("{}: {}".format(key, val))
