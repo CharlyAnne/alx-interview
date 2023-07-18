@@ -31,10 +31,10 @@ try:
         if status_code.isdigit():
             status_code = int(status_code)
             status_code_count[status_code] = status_code_count.get(
-                status_code, )
+                status_code, 0)
 
         # increment line count by 1
-        line_count + 1
+        line_count += 1
 
         # to print statsistics after every 10 lines
         if line_count % 10 == 0:
