@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ Srcipt reads stdin line by line and computes metrics"""
 import random
 import sys
