@@ -5,9 +5,9 @@ import sys
 from time import sleep
 import datetime
 
+status_code_count = {}
 total_file_size = 0
 line_count = 0
-status_code_count = {}
 
 try:
     for line in sys.stdin:
