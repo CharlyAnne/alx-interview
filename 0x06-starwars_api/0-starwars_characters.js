@@ -15,7 +15,6 @@ function getMovieCharacters(movieId) {
     }
 
     const movieData = JSON.parse(body);
-    console.log(`Characters in ${movieData.title} (Episode ${movieData.episode_id}):`);
 
     const charactersUrls = movieData.characters;
     const characterReq = charactersUrls.map(characterUrl => {
@@ -35,7 +34,7 @@ function getMovieCharacters(movieId) {
     Promise.all(characterReq)
       .then(characters => {
         characters.forEach(character => {
-	  console.log(`- ${character.name}`);
+	  console.log(`${character.name}`);
 	});
       })
       .catch(characterErr => {
