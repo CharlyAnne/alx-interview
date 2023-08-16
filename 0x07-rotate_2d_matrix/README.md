@@ -7,7 +7,7 @@ Given an (n x n) 2D matrix, rotate it 90 deg clockwise.
 - You can assume the matrix will have 2 dimensions and will not be empty.
 
 <pre>
-```
+```python3
 icharly$ cat main_0.py
 #!/usr/bin/python3
 """
