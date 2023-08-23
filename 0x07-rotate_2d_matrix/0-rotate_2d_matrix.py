@@ -1,29 +1,23 @@
 #!/usr/bin/python3
-"""
-Script rotates a 2D matrix 90deg clockwise
-"""
+"""Script rotates a 2D matrix"""
 
 
 def rotate_2d_matrix(matrix):
-    n = len(matrix)
+    """
+    Rotate a 2D matrix
+    r = right, l = left
+    t = top, b = bottom
+    """
+    l, r = 0, len(matrix) - 1
 
-    # Transpose the matrix
-    for i in range(n):
-        for j in range(i, n):
-            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+    while l < r:
+        for i in range(r - l):
+            b, t = r, l
 
-    # Reverse each row
-    for i in range(n):
-        matrix[i].reverse()
-
-
-# Example usage
-matrix = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]
-
-rotate_2d_matrix(matrix)
-for row in matrix:
-    print(row)
+            top_l = matrix[t][l + i]
+            matrix[t][l + i] = matrix[b - i][l]
+            matrix[b - i][l] = matrix[b][r - i]
+            matrix[b][r - i] = matrix[t + i][r]
+            matrix[t + i][r] = top_l
+        r -= 1
+        l += 1
