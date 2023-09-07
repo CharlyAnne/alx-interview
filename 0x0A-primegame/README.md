@@ -47,7 +47,7 @@ isWinner = __import__('0-prime_game').isWinner
 print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
 </pre>
 <pre>
-charly@ubuntu:~/0x0A-primegame$ python 0-main.py
+charly@ubuntu:~/0x0A-primegame$ python3 0-main.py
 Winner: Ben
 charly@ubuntu:~/0x0A-primegame$ 
 </pre>
